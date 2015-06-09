@@ -1,9 +1,19 @@
 class ProductsController < ApplicationController
+  before_action :check_if_user_owner?, only: [:edit, :update]
+
   expose(:category)
   expose(:products)
   expose(:product)
   expose(:review) { Review.new }
   expose_decorated(:reviews, ancestor: :product)
+
+
+  def check_if_user_owner?
+    if !signed_in? || current_user.id != product.user_id
+      flash[:error] = 'You are not allowed to edit this product.'
+      redirect_to(category_product_url(category, product))
+    end
+  end
 
   def index
   end

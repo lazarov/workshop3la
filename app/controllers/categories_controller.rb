@@ -1,8 +1,15 @@
 class CategoriesController < ApplicationController
+  before_action :check_if_user_admin?, only: [:new, :edit, :update, :create, :destroy]
 
   expose(:categories)
   expose(:category)
   expose(:product) { Product.new }
+
+  def check_if_user_admin?
+    if !current_user.admin?
+      redirect_to('/users/sign_in')
+    end
+  end
 
   def index
   end
