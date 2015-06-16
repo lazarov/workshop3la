@@ -6,7 +6,9 @@
 
 %p
   - category.products.each do |product|
-    = product.title
+    %li
+      = product.title
+      = product.price
 
 %p
   %h3 New product

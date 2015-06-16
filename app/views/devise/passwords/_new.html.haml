@@ -1,0 +1,12 @@
+#unlock.modal.fade.in
+  .border-form-div
+    .modal-header
+      %button.close{"data-dismiss" => "modal"} x
+      %h2 Forgot your password?
+    .modal-body
+      = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        = f.error_notification
+        .form-inputs
+          = f.input :email, required: true, autofocus: true
+        .form-actions
+          = f.button :submit, "Reset password", class: 'btn btn-success'
