@@ -1,9 +1,16 @@
-%h2 Sign in
-= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .form-inputs
-    = f.input :email, required: true, autofocus: true
-    = f.input :password, required: true
-    = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
-  .form-actions
-    = f.button :submit, "Sign in"
-= render "devise/shared/links"
+.border-form-div
+  .modal-header
+    %h2 Sign in
+  .modal-body
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      = devise_error_messages!
+      .form-inputs
+        = f.input :email, required: true, autofocus: true
+        = f.input :password, required: true
+        = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+      .form-actions
+        = f.button :submit, "Sign in", class: 'btn btn-success'
+    %br/
+    = link_to 'Sign Up', new_user_registration_path, "data-toggle" => "modal", "data-target" => "#sign_up"
+    %br/
+    = link_to "Forgot your password?", new_password_path(resource_name), "data-toggle" => "modal", "data-target" => "#unlock"

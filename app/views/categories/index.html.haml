@@ -1,20 +1,28 @@
 %h1 Listing categories
 
-%table.table
-  %tr
-    %th Name
-    %th
-    %th
-    %th
-
-  - categories.each do |category|
+.col-lg-12
+  %table.table.table-striped.table-hover
     %tr
-      %td= category.name
-      %td= link_to 'Show', category, class: 'btn btn-primary'
-      - if admin?
-        %td= link_to 'Edit', edit_category_path(category), class: 'btn btn-success'
-        %td= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    %th
+      %th
+      %th Name
+      %th Description
+      %th
+    - if admin?
+      %th
+      %th
 
-%br
-- if admin?
-  = link_to 'New Category', new_category_path
+    - categories.each_with_index do |category, i|
+      %tr
+        %td
+        %td= (i+1)
+        %td= category.name
+        %td= category.description
+        %td= link_to 'Show', category, class: 'btn btn-sm btn-primary'
+        - if admin?
+          %td= link_to 'Edit', edit_category_path(category), class: 'btn btn-sm btn-success'
+          %td= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
+
+  %br
+  - if admin?
+    = link_to 'New Category', new_category_path

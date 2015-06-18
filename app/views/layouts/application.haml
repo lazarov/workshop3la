@@ -20,9 +20,6 @@
           .navbar-header
             %span.navbar-brand #{AppConfig.workshops_name}
             %form.navbar-form.navbar-left
-              .form-group
-                %input.form-control{:placeholder => "Search", :type => "text"}
-              %button.btn.btn-default{:type => "submit"} Submit
           %p.navbar-text.navbar-right
             - if signed_in?
               Welcome! #{ current_user.firstname.titleize }
@@ -34,5 +31,6 @@
 
       .container-fluid
         .row
-          .col-lg-12.jumbotron
+          .col-lg-12
+            = render 'shared/flash'
             = yield

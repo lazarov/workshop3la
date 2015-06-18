@@ -1,7 +1,11 @@
+%p#notice= notice
+%p#error= flash[:error]
+
 %h1 Listing products
 
-%table
+%table.table.table-striped.table-hover
   %tr
+    %th
     %th Title
     %th Description
     %th Price
@@ -9,13 +13,15 @@
     %th
     %th
 
-  - products.each do |product|
+  - products.each_with_index do |product, i|
     %tr
+      %td= (i+1)
       %td= product.title
       %td= product.description
       %td= product.price
-      %td= link_to 'Show', category_product_path(product.category, product)
-      %td= link_to 'Edit', edit_category_product_path(product.category, product)
-      %td= link_to 'Destroy', category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to 'Show', category_product_path(product.category, product), class: 'btn btn-xs btn-primary'
+      %td= link_to 'Edit', edit_category_product_path(product.category, product), class: 'btn btn-xs btn-success'
+      %td= link_to 'Destroy', category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger'
 
 %br
+= link_to 'Back', category_path(category.id), class: 'btn btn-primary'
