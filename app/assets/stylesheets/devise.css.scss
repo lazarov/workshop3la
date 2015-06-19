@@ -1,4 +1,5 @@
 /* devise User sign in/up forms. */
+
 .border-form-div {
   max-width: 300px;
   padding: 19px 29px 29px;
@@ -22,4 +23,9 @@
   height: auto;
   margin-bottom: 15px;
   padding: 7px 9px;
+}
+
+/*Password recovery */
+#unlock .border-form-div  {
+  height: 450px;
 }

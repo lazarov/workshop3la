@@ -28,7 +28,8 @@ User.create!(firstname: 'Marek', lastname: 'Bak', email: 'mbak@owad.pl', passwor
                           email: Faker::Internet.email,
                        password: Faker::Internet.password(8))
   #puts user.inspect
-  category = Category.create!( name: Faker::Product.brand )
+  category = Category.create!( name: Faker::Product.brand,
+                              description: Faker::Lorem.paragraph)
   #puts category.inspect
 
   if ( !category.nil? )
