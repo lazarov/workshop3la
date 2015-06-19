@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :check_if_user_owner?, only: [:edit, :update]
+  before_action :user_owner?, only: [:edit, :update]
 
   expose(:category)
   expose(:products)
@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   expose_decorated(:reviews, ancestor: :product)
 
 
-  def check_if_user_owner?
+  def user_owner?
     if !signed_in? || current_user.id != product.user_id
       flash[:error] = 'You are not allowed to edit this product.'
       redirect_to(category_product_url(category, product))
@@ -32,6 +32,7 @@ class ProductsController < ApplicationController
 
     if product.save
       category.products << product
+      current_user.products << product
       redirect_to category_product_url(category, product), notice: 'Product was successfully created.'
     else
       render action: 'new'

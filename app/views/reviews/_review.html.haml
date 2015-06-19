@@ -1,4 +1,11 @@
-%p= review.content
-%p
-  %b= review.rating
-  %em= review.author
+%ul.list-group
+  %li.list-group-item
+    = review.content
+    %p#r_a
+    %b Rating:
+    = review.rating
+    |
+    revieved on:
+    = review.created_at.strftime("%B, %d %Y")
+    %b by:
+    %em= review.author

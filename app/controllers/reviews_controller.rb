@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
 
   def create
     self.review = Review.new(review_params)
-
+    current_user.reviews << review
     if review.save
       product.reviews << review
       redirect_to category_product_url(product.category, product), notice: 'Review was successfully created.'

@@ -1,20 +1,30 @@
-%p#error= flash[:error]
-
 %p
-  %b Name:
+  %b Category:
   = category.name
 
-%p
+%table.table.table-striped.table-hover
+  %tr
+  %th
+    %th
+    %th Name
+    %th Description
+    %th Price
+    %th
+
   - category.products.each_with_index do |product, i|
-    = (i+1)
-    = product.title
-    = product.price
-    = product.description
-    %br/
-  -if signed_in?
-    %p
-      %h3 New product
-      = render 'products/form'
+    %tr
+      %td
+      %td= (i+1)
+      %td= product.title
+      %td= product.description
+      %td= number_to_currency(product.price)
+      %td= link_to 'Show', category_product_path(product.category, product), class: 'btn btn-sm btn-primary'
+
+
+%p
+  %h3 New product
+  = render 'products/form'
 
 = link_to 'Back', categories_path, class: 'btn btn-primary'
-= link_to 'Edit', edit_category_path(category), class: 'btn btn-success'
+- if admin?
+  = link_to 'Edit', edit_category_path(category), class: 'btn btn-success'
