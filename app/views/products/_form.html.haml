@@ -5,15 +5,15 @@
       %ul
         - product.errors.full_messages.each do |msg|
           %li= msg
-
-  .col-lg-12
-    .form-group.col-lg-6
-      = f.label :title
-      = f.text_field :title, class: 'form-control'
-      = f.label :price
-      = f.text_field :price, class: 'form-control'
-    .form-group.col-lg-6
-      = f.label :description
-      = f.text_area :description, class: 'form-control'
+  .row
+    .col-lg-12
+      .form-group.col-lg-5
+        = f.label :title
+        = f.text_field :title, class: 'form-control'
+        = f.label :price
+        = f.text_field :price, class: 'form-control'
+      .form-group.col-lg-7
+        = f.label :description
+        = f.text_area :description, class: 'form-control'
 
   = f.submit 'Save', class: 'btn btn-default'
