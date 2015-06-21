@@ -33,10 +33,12 @@ User.create!(firstname: 'Marek', lastname: 'Bak', email: 'mbak@owad.pl', passwor
   #puts category.inspect
 
   if ( !category.nil? )
-    (rand(1..7)).times do
+    (rand(1..8)).times do
+      u_id = User.order(id: :desc).limit(13).pluck(:id)
       product = category.products.create!(title: Faker::Product.product_name,
                         description: Faker::Lorem.paragraph,
-                              price: rand(1..99))
+                              price: rand(1..199),
+                              user_id: u_id[rand(u_id.length)])
 
       if ( !product.nil? && !user.nil? )
         (rand(1..7)).times do
