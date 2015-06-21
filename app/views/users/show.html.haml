@@ -18,10 +18,10 @@
         = user.created_at
       %p
         %b Account type:
-        -if admin?
+        -if user.admin?
           Administrator
         - else
-          User  
+          User
     .col-lg-6
       %p
         %b User's products:
@@ -47,7 +47,6 @@
 - user.reviews.latest.each_with_index do | review, i |
   %ul.list-group
     %li.list-group-item
-      = (i+1)
       = review.content
       %p#r_a
       %b Rating:
