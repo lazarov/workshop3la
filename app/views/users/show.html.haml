@@ -1,0 +1,57 @@
+.col-lg-12
+  .row
+    .col-lg-6
+      %p
+        %b First name:
+        = user.firstname
+      %p
+        %b Last name:
+        = user.lastname
+      %p
+        %b Email:
+        = user.email
+      %p
+        %b Last Seen:
+        = user.last_sign_in_at
+      %p
+        %b Account created:
+        = user.created_at
+      %p
+        %b Account type:
+        -if admin?
+          Administrator
+        - else
+          User  
+    .col-lg-6
+      %p
+        %b User's products:
+        %table.table.table-striped.table-hover
+          %tr
+            %th
+            %th Name
+            %th Category
+            %th
+          - user.products.each_with_index do | product, i |
+            %tr
+              %td= (i+1)
+              %td= product.title
+              %td= product.category.name
+              %td= link_to 'Show', category_product_path(product.category_id, product), class: 'btn btn-xs btn-primary'
+
+%br/
+
+= link_to 'Back', categories_path, class: 'btn btn-primary'
+= link_to 'Edit', edit_user_registration_path, class: 'btn btn-success'
+
+%h4 User latest reviews:
+- user.reviews.latest.each_with_index do | review, i |
+  %ul.list-group
+    %li.list-group-item
+      = (i+1)
+      = review.content
+      %p#r_a
+      %b Rating:
+      = review.rating
+      |
+      revieved on:
+      = review.created_at.strftime("%d-%m-%y")
